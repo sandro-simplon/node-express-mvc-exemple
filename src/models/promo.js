@@ -1,23 +1,13 @@
 const db = require("../db");
 
-class Promo {
-  constructor(props) {
-    const {name} = props;
+exports.getAll = (callback) => {
+  db.query("SELECT * FROM promos;", (error, result) => {
+    if (error) {
+      console.log("error: ", error);
+      callback(error, null);
+      return;
+    }
 
-    this.name = name;
-  }
-
-  static getAll() {
-    db.query("SELECT * FROM promos", (error, result) => {
-      if (error) {
-        console.log("error: ", error);
-        throw error;
-      }
-
-      // console.log("Les promos: ", result);
-      return result;
-    })
-  }
+    callback(null, result);
+  })
 }
-
-module.exports = Promo;
