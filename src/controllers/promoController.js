@@ -1,7 +1,12 @@
 const { response } = require("express");
 const Promo = require("../models/promo");
 
-exports.findAll = () => {
-  const promos = Promo.getAll();
-  console.log(promos);
+exports.findAll = (request, response) => {
+  Promo.getAll((error, promos) => {
+    if (error) {
+      response.send(error.message);
+    }
+
+    response.render("home.ejs", { promos });
+  });
 }
