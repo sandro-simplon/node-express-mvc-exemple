@@ -7,6 +7,9 @@ const server = express();
 
 server.engine("ejs", ejs.renderFile);
 server.set("views", "./src/views");
+server.use(express.static("./src/assets"));
+
+server.use(express.urlencoded({ extended: false }));
 
 server.use(router);
 

@@ -7,9 +7,4 @@ const db = mysql.createConnection({
   database: "promoexemple"
 });
 
-db.connect((error) => {
-  if (error) throw error;
-  console.log("Connection to dabase works!");
-});
-
 module.exports = db;
