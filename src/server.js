@@ -1,9 +1,15 @@
 const express = require('express');
 const ejs = require('ejs');
+const sass = require('node-sass-middleware');
 
 const router = require("./routers");
 
 const server = express();
+
+server.use(sass({
+  src: "./src",
+  dest: "./src/assets"
+}));
 
 server.engine("ejs", ejs.renderFile);
 server.set("views", "./src/views");
