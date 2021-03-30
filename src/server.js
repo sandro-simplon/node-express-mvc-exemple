@@ -1,6 +1,7 @@
 const express = require('express');
 const ejs = require('ejs');
 const sass = require('node-sass-middleware');
+const cookieParser = require('cookie-parser');
 
 const router = require("./routers");
 
@@ -16,6 +17,7 @@ server.set("views", "./src/views");
 server.use(express.static("./src/assets"));
 
 server.use(express.urlencoded({ extended: false }));
+server.use(cookieParser());
 
 server.use(router);
 
