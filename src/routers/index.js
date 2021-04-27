@@ -1,21 +1,16 @@
 const express = require("express");
 
-const isAuth = require('../middlewares/isAuth');
-
-const promoController = require("../controllers/promoController");
-const userController = require("../controllers/userController");
+const authRouter = require("./auth");
+const promoRouter = require("./promo");
 
 const router = express.Router();
 
-router.get("/", promoController.findAll);
-router.get("/promos/:id", isAuth, promoController.findOne);
-router.post("/promos", promoController.addOne);
+router.get("/", (request, response) => {
+  response.redirect("/promos");
+});
 
-router.get("/signup", userController.signup);
-router.post("/signup", userController.newAccount);
-router.get("/login", userController.login);
-router.post("/login", userController.authenticate);
-router.get("/logout", userController.logout);
+router.use("/promos", promoRouter);
+router.use(authRouter);
 
 router.use("*", (request, response) => {
   response.status(404).json({
