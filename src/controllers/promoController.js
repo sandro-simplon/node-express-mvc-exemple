@@ -39,7 +39,6 @@ exports.findOne = (request, response) => {
         })
       };
       response.status(200).json(promoObject);
-      // response.render("promo.ejs", { promoName, students, user });
     }
   });
 }
@@ -47,9 +46,11 @@ exports.findOne = (request, response) => {
 exports.addOne = (request, response) => {
   Promo.create(request.body, (error, result) => {
     if (error) {
-      response.send(error.message);
+      response.status(500).json({
+        message: "Le serveur est cassé."
+      });
     } else {
-      response.redirect("/");
+      response.status(201).json(result);
     }
   })
 }
