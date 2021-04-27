@@ -1,9 +1,9 @@
 const Promo = require("../models/promo");
 
 exports.findAll = (request, response) => {
-  const { user } = request;
+  const { user, query } = request;
 
-  Promo.getAll((error, promos) => {
+  Promo.getAll(query, (error, promos) => {
     if (error) {
       response.status(500).json({
         message: "Le serveur est cassé."

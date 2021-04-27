@@ -1,7 +1,16 @@
 const db = require("../db");
 
-exports.getAll = (callback) => {
-  db.query("SELECT * FROM promos;", (error, result) => {
+exports.getAll = (filters, callback) => {
+  console.log(filters);
+
+  let query = "SELECT * FROM promos";
+
+  if (filters.name) {
+    query = `${query} WHERE name = '${filters.name}';`
+    console.log(query);
+  }
+
+  db.query(query, (error, result) => {
     if (error) {
       console.log("error: ", error);
       callback(error, null);
