@@ -17,4 +17,10 @@ router.get("/login", userController.login);
 router.post("/login", userController.authenticate);
 router.get("/logout", userController.logout);
 
+router.use("*", (request, response) => {
+  response.status(404).json({
+    message: "La ressource demandée est introuvable."
+  })
+});
+
 module.exports = router;
